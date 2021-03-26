@@ -1,18 +1,30 @@
 <template>
   <div class="home">
+    {{ name }}
     <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <input type="text" name="unme" v-model="name" id="" />
+    {{ name }}
+    <button @click="changeText">click me</button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import { defineComponent, onMounted, reactive, ref } from "vue";
 
 export default defineComponent({
   name: "Home",
-  components: {
-    HelloWorld,
+  components: {},
+  setup() {
+    const name = ref('Binoy Sarker')
+    const changeText = () => {
+      name.value = 'hello'
+    }
+    onMounted(() => {
+      console.log('on mounted');
+      
+    })
+
+    return { name, changeText};
   },
 });
 </script>
