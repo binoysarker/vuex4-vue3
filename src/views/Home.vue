@@ -7,12 +7,13 @@
     <button @click="changeText">click me</button>
     <Button label="Submit" />
     <br />
-    Products: {{store}}
+    Products: {{ store.state.count }}
   </div>
 </template>
 
 <script lang="ts">
 import { useStore } from "@/store";
+import { MutationTypes } from "@/store/store.types";
 import { defineComponent, onMounted, ref } from "vue";
 
 export default defineComponent({
@@ -26,6 +27,7 @@ export default defineComponent({
     };
     onMounted(() => {
       console.log("on mounted");
+      store.commit(MutationTypes.INC_COUNTER, 1);
     });
 
     return { name, changeText, store };

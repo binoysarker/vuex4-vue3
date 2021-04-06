@@ -1,14 +1,19 @@
-import { createStore, Store, useStore as baseUseStore } from "vuex";
-import { key, State } from "./store.types";
+import { createLogger, createStore } from "vuex";
+import { actions } from "./actions";
+import { getters } from "./getters";
+import { mutations } from "./mutations";
+import { state } from "./state";
+import { Store } from "./store.types";
+import createPersistedState from "vuex-persistedstate";
 
-export const store = createStore<State>({
-  state: {
-    count: 0,
-    shopifyStore: null,
-  },
+export const store = createStore({
+  state,
+  mutations,
+  actions,
+  getters,
+  plugins: [createLogger(), createPersistedState()]
 });
 
-// define your own `useStore` composition function
-export function useStore(): Store<State> {
-  return baseUseStore(key);
+export function useStore(){
+  return store as Store;
 }
