@@ -5,26 +5,30 @@
     <input type="text" name="unme" v-model="name" id="" />
     {{ name }}
     <button @click="changeText">click me</button>
+    <Button label="Submit" />
+    <br />
+    Products: {{store}}
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive, ref } from "vue";
+import { useStore } from "@/store";
+import { defineComponent, onMounted, ref } from "vue";
 
 export default defineComponent({
   name: "Home",
   components: {},
   setup() {
-    const name = ref('Binoy Sarker')
+    const name = ref("Binoy Sarker");
+    const store = useStore();
     const changeText = () => {
-      name.value = 'hello'
-    }
+      name.value = "hello";
+    };
     onMounted(() => {
-      console.log('on mounted');
-      
-    })
+      console.log("on mounted");
+    });
 
-    return { name, changeText};
+    return { name, changeText, store };
   },
 });
 </script>

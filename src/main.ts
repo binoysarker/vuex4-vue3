@@ -1,6 +1,11 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import store from "./store";
-
-createApp(App).use(store).use(router).mount("#app");
+import { store } from "./store";
+import PrimeVuePlugin from "./plugins/primevue-plugin";
+import { key } from "./store/store.types";
+const app = createApp(App);
+app.use(store, key);
+app.use(router);
+app.use(PrimeVuePlugin);
+app.mount("#app");
